@@ -134,7 +134,7 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
   .settings(
     resolvers += new MavenRepository("bintray-pchiusano-scalaz-stream", "http://dl.bintray.com/pchiusano/maven"),
     libraryDependencies ++= Seq(
-      "gov.nasa.jpl.imce.thirdParty" %% "scala-libraries" % Versions.scala_libraries % "provided" artifacts
+      "gov.nasa.jpl.imce.thirdParty" %% "scala-libraries" % Versions.scala_libraries % "compile" artifacts
         Artifact("scala-libraries", "zip", "zip", Some("resource"), Seq(), None, Map()),
 
       "org.scalaz" %% "scalaz-core" % Versions.scalaz % "compile" withSources() withJavadoc(),

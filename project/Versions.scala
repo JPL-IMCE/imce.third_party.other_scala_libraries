@@ -2,7 +2,7 @@
 object Versions {
 
   // this project's version
-  val version = "1.0"
+  val version = "1.1"
   val scala_version = "2.11.7"
 
   // https://github.jpl.nasa.gov/imce/imce.third_party.scala_libraries
