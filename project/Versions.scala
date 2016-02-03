@@ -2,7 +2,7 @@
 object Versions {
 
   // this project's version
-  val version = "1.2"
+  val version = "1.3"
   val scala_version = "2.11.7"
 
   // otherLibs
@@ -36,7 +36,7 @@ object Versions {
   // http://mvnrepository.com/artifact/org.scalaz/scalaz-concurrent_2.11
   // http://mvnrepository.com/artifact/org.scalaz/scalaz-iteratee_2.11
   // http://mvnrepository.com/artifact/org.scalaz/scalaz-scalacheck-binding_2.11
-  val scalaz = "7.2.0"
+  val scalaz = "7.1.6"
 
   // http://mvnrepository.com/artifact/org.scalaz/scalaz-xml_2.11
   val scalaz_xml = "7.1.6"
