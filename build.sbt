@@ -174,9 +174,10 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
 lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
   .settings(
     resolvers += new MavenRepository("bintray-pchiusano-scalaz-stream", "http://dl.bintray.com/pchiusano/maven"),
+
     libraryDependencies ++= Seq(
+      //extra("artifact.kind" -> "third_party.aggregate.libraries")
       "gov.nasa.jpl.imce.thirdParty" %% "scala-libraries" % Versions_scala_libraries.version
-        extra("artifact.kind" -> "third_party.aggregate.libraries")
         artifacts
         Artifact("scala-libraries", "zip", "zip", Some("resource"), Seq(), None, Map()),
 
