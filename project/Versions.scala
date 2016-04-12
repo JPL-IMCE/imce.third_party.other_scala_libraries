@@ -2,7 +2,8 @@
 object Versions {
 
   // this project's version
-  val version = "2.3.3"
+  val version = "2.4.0"
+
   val scala_version = "2.11.7"
 
   // otherLibs
@@ -47,4 +48,6 @@ object Versions {
   // http://mvnrepository.com/artifact/com.typesafe.play/play_2.11
   val play = "2.4.6"
 
+  // https://github.com/aparo/play-json-extra
+  val play_json_extra = "2.4.3"
 }

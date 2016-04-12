@@ -210,7 +210,9 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
       "com.typesafe.play" %% "play" % Versions.play % "compile" withSources(),
       "com.typesafe.play" %% "play-iteratees" % Versions.play % "compile" withSources(),
       "com.typesafe.play" %% "play-json" % Versions.play % "compile" withSources(),
-      "com.typesafe.play" %% "play-functional" % Versions.play % "compile" withSources()
+      "com.typesafe.play" %% "play-functional" % Versions.play % "compile" withSources(),
+
+      "io.megl" %% "play-json-extra" % Versions.play_json_extra % "compile" withSources()
     ),
     libraryDependencies ~= {
       _ map {
