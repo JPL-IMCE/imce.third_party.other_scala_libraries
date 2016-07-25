@@ -2,7 +2,7 @@
 object Versions {
 
   // this project's version
-  val version = "2.6.0"
+  val version = "2.7.0"
 
   val scala_version = "2.11.8"
 
@@ -47,4 +47,7 @@ object Versions {
 
   // https://github.com/aparo/play-json-extra
   val play_json_extra = "2.4.3"
+
+  // https://github.com/NET-A-PORTER/scala-uri
+  val net_a_porter_uri = "0.4.14"
 }

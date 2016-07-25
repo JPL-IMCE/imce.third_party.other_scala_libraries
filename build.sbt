@@ -211,7 +211,9 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
 
       "io.megl" %% "play-json-extra" % Versions.play_json_extra % "compile" withSources(),
 
-      "org.julienrf" %% "play-json-derived-codecs" % Versions.play_json_derived_codecs % "compile" withSources()
+      "org.julienrf" %% "play-json-derived-codecs" % Versions.play_json_derived_codecs % "compile" withSources(),
+
+      "com.netaporter" %% "scala-uri" % Versions.net_a_porter_uri % "compile" withSources()
 
     ),
     libraryDependencies ~= {
