@@ -186,7 +186,6 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
       "org.scalaz" %% "scalaz-concurrent" % Versions.scalaz % "compile" withSources() withJavadoc(),
       "org.scalaz" %% "scalaz-iteratee" % Versions.scalaz % "compile" withSources() withJavadoc(),
       "org.scalaz" %% "scalaz-scalacheck-binding" % Versions.scalaz % "compile" withSources() withJavadoc(),
-      "org.scalaz" %% "scalaz-xml" % Versions.scalaz_xml % "compile" withSources() withJavadoc(),
 
       "com.typesafe" % "config" % Versions.config % "compile" withSources() withJavadoc(),
 
@@ -195,8 +194,6 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
       "org.scalatest" %% "scalatest" % Versions.scalaTest % "compile" withSources() withJavadoc(),
 
       "org.specs2" %% "specs2-core" % Versions.specs2 % "compile" withSources() withJavadoc(),
-
-      "org.scalaz.stream" %% "scalaz-stream" % Versions.scalaz_stream % "compile" withSources() withJavadoc(),
 
       "org.parboiled" %% "parboiled" % Versions.parboiled % "compile" withSources() withJavadoc(),
 
@@ -212,7 +209,10 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
       "com.typesafe.play" %% "play-json" % Versions.play % "compile" withSources(),
       "com.typesafe.play" %% "play-functional" % Versions.play % "compile" withSources(),
 
-      "io.megl" %% "play-json-extra" % Versions.play_json_extra % "compile" withSources()
+      "io.megl" %% "play-json-extra" % Versions.play_json_extra % "compile" withSources(),
+
+      "org.julienrf" %% "play-json-derived-codecs" % Versions.play_json_derived_codecs % "compile" withSources()
+
     ),
     libraryDependencies ~= {
       _ map {
