@@ -6,6 +6,8 @@ import gov.nasa.jpl.imce.sbt._
 
 useGpg := true
 
+updateOptions := updateOptions.value.withCachedResolution(true)
+
 developers := List(
   Developer(
     id="rouquett",
@@ -97,11 +99,6 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
                   g.nodes.find(m => m.id == tID)
                 }
               }.to[Set]
-
-              val nq = next.toSeq.sortBy(_.id.idString)
-              s.log.info(s" acc => ${nq.size}")
-              nq.foreach { n => s.log.info(s" + $n") }
-
               if (next.isEmpty)
                 result
               else
@@ -120,37 +117,12 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
               file <- {
                 s.log.info(s"compile: ${oReport.organization}, ${file.name}")
                 val graph = backend.SbtUpdateReport.fromConfigurationReport(compileConfig, mReport.module)
-                s.log.info(s"graph nodes: ${graph.nodes.size}")
-                graph.nodes.sortBy(_.id.idString).foreach { n =>
-                  s.log.info(s" \nnode: $n (is evited=${n.isEvicted})")
-                  val nid = n.id
-                  val outEdges = graph.edges.filter (_._1 == nid)
-                  s.log.info(s"\n out edges: ${outEdges.size}")
-                  outEdges.foreach { case (_, nTo) =>
-                    s.log.info(s" -> $nTo")
-                  }
-
-                  val inEdges = graph.edges.filter(_._2 == nid)
-                  s.log.info(s"\n in edges: ${inEdges.size}")
-                  inEdges.foreach { case (nFrom, _) =>
-                    s.log.info(s" <- $nFrom")
-                  }
-                }
                 val roots: Set[Module] = graph.nodes.filter { m =>
                   m.id.organisation == mReport.module.organization &&
                     m.id.name == mReport.module.name &&
                     m.id.version == mReport.module.revision
                 }.to[Set]
-                s.log.info(s"\n\nroots: ${roots.size}")
-                roots.toSeq.sortBy(_.id.idString).foreach { m =>
-                  s.log.info(s" - root: $m")
-                }
-
                 val scope: Seq[Module] = transitiveScope(roots, graph).to[Seq].sortBy( m => m.id.organisation + m.id.name)
-                s.log.info(s"\n\nscope: ${scope.size}")
-                scope.toSeq.sortBy(_.id.idString).foreach { m =>
-                  s.log.info(s" - scope: $m")
-                }
 
                 val files = scope.flatMap { m: Module => m.jarFile }.to[Seq].sorted
                 s.log.info(s"Excluding ${files.size} jars from zip aggregate resource dependencies")
@@ -171,15 +143,15 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
             organizationArtifactKey = s"{oReport.organization},${oReport.name}"
             mReport <- oReport.modules
             (artifact, file) <- mReport.artifacts
-            if "jar" == artifact.extension && !zipFiles.contains(file)
+            if !mReport.evicted && "jar" == artifact.extension && !zipFiles.contains(file)
           } yield (oReport.organization, oReport.name, file, artifact)
 
           val fileArtifactsByType = fileArtifacts.groupBy { case (_, _, _, a) =>
             a.`classifier`.getOrElse(a.`type`)
           }
-          val jarArtifacts = fileArtifactsByType("jar")
-          val srcArtifacts = fileArtifactsByType("sources")
-          val docArtifacts = fileArtifactsByType("javadoc")
+          val jarArtifacts = fileArtifactsByType("jar").sortBy { case (o, _, jar, _) => s"$o/${jar.name}" }
+          val srcArtifacts = fileArtifactsByType("sources").sortBy { case (o, _, jar, _) => s"$o/${jar.name}" }
+          val docArtifacts = fileArtifactsByType("javadoc").sortBy { case (o, _, jar, _) => s"$o/${jar.name}" }
 
           val jars = jarArtifacts.map { case (o, _, jar, _) =>
             s.log.info(s"* jar: $o/${jar.name}")
