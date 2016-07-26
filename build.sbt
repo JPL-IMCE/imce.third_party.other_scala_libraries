@@ -97,6 +97,11 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
                   g.nodes.find(m => m.id == tID)
                 }
               }.to[Set]
+
+              val nq = next.toSeq.sortBy(_.id.idString)
+              s.log.info(s" acc => ${nq.size}")
+              nq.foreach { n => s.log.info(s" + $n") }
+
               if (next.isEmpty)
                 result
               else
@@ -115,14 +120,43 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
               file <- {
                 s.log.info(s"compile: ${oReport.organization}, ${file.name}")
                 val graph = backend.SbtUpdateReport.fromConfigurationReport(compileConfig, mReport.module)
+                s.log.info(s"graph nodes: ${graph.nodes.size}")
+                graph.nodes.sortBy(_.id.idString).foreach { n =>
+                  s.log.info(s" \nnode: $n (is evited=${n.isEvicted})")
+                  val nid = n.id
+                  val outEdges = graph.edges.filter (_._1 == nid)
+                  s.log.info(s"\n out edges: ${outEdges.size}")
+                  outEdges.foreach { case (_, nTo) =>
+                    s.log.info(s" -> $nTo")
+                  }
+
+                  val inEdges = graph.edges.filter(_._2 == nid)
+                  s.log.info(s"\n in edges: ${inEdges.size}")
+                  inEdges.foreach { case (nFrom, _) =>
+                    s.log.info(s" <- $nFrom")
+                  }
+                }
                 val roots: Set[Module] = graph.nodes.filter { m =>
                   m.id.organisation == mReport.module.organization &&
                     m.id.name == mReport.module.name &&
                     m.id.version == mReport.module.revision
                 }.to[Set]
+                s.log.info(s"\n\nroots: ${roots.size}")
+                roots.toSeq.sortBy(_.id.idString).foreach { m =>
+                  s.log.info(s" - root: $m")
+                }
+
                 val scope: Seq[Module] = transitiveScope(roots, graph).to[Seq].sortBy( m => m.id.organisation + m.id.name)
+                s.log.info(s"\n\nscope: ${scope.size}")
+                scope.toSeq.sortBy(_.id.idString).foreach { m =>
+                  s.log.info(s" - scope: $m")
+                }
+
                 val files = scope.flatMap { m: Module => m.jarFile }.to[Seq].sorted
                 s.log.info(s"Excluding ${files.size} jars from zip aggregate resource dependencies")
+                require(
+                  files.nonEmpty,
+                  s"There should be some excluded dependencies\ngraph=$graph\nroots=$roots\nscope=$scope")
                 files.foreach { f =>
                   s.log.info(s" exclude: ${f.getParentFile.getParentFile.name}/${f.getParentFile.name}/${f.name}")
                 }
