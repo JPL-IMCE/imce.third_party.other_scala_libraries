@@ -30,7 +30,7 @@ by several organizations:
     resolvers += Resolver.bintrayRepo("jpl-imce", "gov.nasa.jpl.imce"),
 
     libraryDependencies += 
-      "gov.nasa.jpl.imce" %% "imce.third_party.scala_libraries" % "<version>"
+      "gov.nasa.jpl.imce" %% "imce.third_party.other_scala_libraries" % "<version>"
         artifacts
-        Artifact("imce.third_party.scala_libraries", "zip", "zip", Some("resource"), Seq(), None, Map())
+        Artifact("imce.third_party.other_scala_libraries", "zip", "zip", Some("resource"), Seq(), None, Map())
 ```
