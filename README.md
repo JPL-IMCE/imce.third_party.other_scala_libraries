@@ -20,3 +20,17 @@ by several organizations:
 - [io.spray](http://spray.io) Elegant, high-performance HTTP for Akka actors.
 
 - [com.typesafe.play](https://www.playframework.com) High velocity web framework forJava & Scala
+
+[![Build Status](https://travis-ci.org/JPL-IMCE/imce.third_party.other_scala_libraries.svg?branch=master)](https://travis-ci.org/JPL-IMCE/imce.third_party.other_scala_libraries)
+[ ![Download](https://api.bintray.com/packages/jpl-imce/gov.nasa.jpl.imce/imce.third_party.other_scala_libraries/images/download.svg) ](https://bintray.com/jpl-imce/gov.nasa.jpl.imce/imce.third_party.other_scala_libraries/_latestVersion)
+ 
+## Usage
+
+```
+    resolvers += Resolver.bintrayRepo("jpl-imce", "gov.nasa.jpl.imce"),
+
+    libraryDependencies += 
+      "gov.nasa.jpl.imce" %% "imce.third_party.scala_libraries" % "<version>"
+        artifacts
+        Artifact("imce.third_party.scala_libraries", "zip", "zip", Some("resource"), Seq(), None, Map())
+```

@@ -4,16 +4,7 @@ import net.virtualvoid.sbt.graph._
 
 import gov.nasa.jpl.imce.sbt._
 
-useGpg := true
-
 updateOptions := updateOptions.value.withCachedResolution(true)
-
-developers := List(
-  Developer(
-    id="rouquett",
-    name="Nicolas F. Rouquette",
-    email="nicolas.f.rouquette@jpl.nasa.gov",
-    url=url("https://gateway.jpl.nasa.gov/personal/rouquett/default.aspx")))
 
 val resourceArtifact = settingKey[Artifact]("Specifies the project's resource artifact")
 
@@ -181,11 +172,13 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
   .settings(
     resolvers += new MavenRepository("bintray-pchiusano-scalaz-stream", "http://dl.bintray.com/pchiusano/maven"),
 
+    resolvers += Resolver.bintrayRepo("jpl-imce", "gov.nasa.jpl.imce"),
+
     libraryDependencies ++= Seq(
       //extra("artifact.kind" -> "third_party.aggregate.libraries")
-      "gov.nasa.jpl.imce.thirdParty" %% "scala-libraries" % Versions_scala_libraries.version
+      "gov.nasa.jpl.imce" %% "imce.third_party.scala_libraries" % Versions_scala_libraries.version
         artifacts
-        Artifact("scala-libraries", "zip", "zip", Some("resource"), Seq(), None, Map()),
+        Artifact("imce.third_party.scala_libraries", "zip", "zip", Some("resource"), Seq(), None, Map()),
 
       "org.scalaz" %% "scalaz-core" % Versions.scalaz % "compile" withSources() withJavadoc(),
       "org.scalaz" %% "scalaz-effect" % Versions.scalaz % "compile" withSources() withJavadoc(),
