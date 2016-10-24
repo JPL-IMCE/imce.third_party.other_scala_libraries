@@ -8,9 +8,9 @@ organization := "gov.nasa.jpl.imce"
 
 organizationName := "JPL-IMCE"
 
-homepage := Some(url(s"https://github.com/${organizationName.value}/${moduleName.value}"))
+organizationHomepage := Some(url(s"https://github.com/${organizationName.value}"))
 
-organizationHomepage := Some(url("https://github.com/${organizationName.value}"))
+homepage := Some(url(s"https://github.com/${organizationName.value}/${moduleName.value}"))
 
 git.remoteRepo := s"git@github.com:${organizationName.value}/${moduleName.value}.git"
 

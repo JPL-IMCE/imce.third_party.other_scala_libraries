@@ -2,7 +2,7 @@
 object Versions {
 
   // this project's version
-  val version = "3.1.0"
+  val version = "3.2.0"
 
   val scala_version = "2.11.8"
 
@@ -50,4 +50,10 @@ object Versions {
 
   // https://github.com/NET-A-PORTER/scala-uri
   val net_a_porter_uri = "0.4.14"
+
+  // https://github.com/cowtowncoder/java-uuid-generator
+  val java_uuid_generator="3.1.3"
+
+  // http://mvnrepository.com/artifact/com.lihaoyi/upickle_2.11
+  val upickle="0.4.3"
 }

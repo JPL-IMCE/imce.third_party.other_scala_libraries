@@ -214,7 +214,11 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
 
       "com.netaporter" %% "scala-uri" % Versions.net_a_porter_uri % "compile" withSources(),
 
-      "com.fasterxml.uuid" % "java-uuid-generator" % Versions_java_uuid_generator.version % "compile"
+      "com.fasterxml.uuid" % "java-uuid-generator" % Versions.java_uuid_generator % "compile",
+
+      "com.lihaoyi" %% "upickle" % Versions.upickle % "compile",
+
+      "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "compile"
     ),
     libraryDependencies ~= {
       _ map {
