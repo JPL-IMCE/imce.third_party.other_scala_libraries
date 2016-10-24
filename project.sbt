@@ -2,22 +2,22 @@ sbtPlugin := false
 
 name := "imce.third_party.other_scala_libraries"
 
-moduleName := "imce.third_party.other_scala_libraries"
+moduleName := name.value
 
 organization := "gov.nasa.jpl.imce"
 
-homepage := Some(url("https://github.com/JPL-IMCE/imce.third_party.other_scala_libraries"))
-
 organizationName := "JPL-IMCE"
 
-organizationHomepage := Some(url("http://www.jpl.nasa.gov"))
+homepage := Some(url(s"https://github.com/${organizationName.value}/${moduleName.value}"))
 
-git.remoteRepo := "git@github.com:JPL-IMCE/imce.third_party.other_scala_libraries.git"
+organizationHomepage := Some(url("https://github.com/${organizationName.value}"))
+
+git.remoteRepo := s"git@github.com:${organizationName.value}/${moduleName.value}.git"
 
 startYear := Some(2015)
 
 scmInfo := Some(ScmInfo(
-  browseUrl = url("https://github.com/JPL-IMCE/imce.third_party.other_scala_libraries"),
+  browseUrl = url(s"https://github.com/${organizationName.value}/${moduleName.value}"),
   connection = "scm:"+git.remoteRepo.value))
 
 developers := List(

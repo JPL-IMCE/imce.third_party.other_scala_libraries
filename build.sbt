@@ -212,8 +212,9 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
 
       "org.julienrf" %% "play-json-derived-codecs" % Versions.play_json_derived_codecs % "compile" withSources(),
 
-      "com.netaporter" %% "scala-uri" % Versions.net_a_porter_uri % "compile" withSources()
+      "com.netaporter" %% "scala-uri" % Versions.net_a_porter_uri % "compile" withSources(),
 
+      "com.fasterxml.uuid" % "java-uuid-generator" % Versions_java_uuid_generator.version % "compile"
     ),
     libraryDependencies ~= {
       _ map {
