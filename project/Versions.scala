@@ -2,7 +2,7 @@
 object Versions {
 
   // this project's version
-  val version = "3.2.0"
+  val version = "3.3.0"
 
   val scala_version = "2.11.8"
 
@@ -56,4 +56,13 @@ object Versions {
 
   // http://mvnrepository.com/artifact/com.lihaoyi/upickle_2.11
   val upickle="0.4.3"
+
+  // http://mvnrepository.com/artifact/org.apache.spark/spark-core_2.11
+  val spark_core="2.0.1"
+
+  // http://mvnrepository.com/artifact/org.apache.spark/spark-sql_2.11
+  val spark_sql="2.0.1"
+
+  // http://mvnrepository.com/artifact/org.apache.spark/spark-graphx_2.11
+  val spark_graphx="2.0.1"
 }

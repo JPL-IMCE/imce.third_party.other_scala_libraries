@@ -218,7 +218,11 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
 
       "com.lihaoyi" %% "upickle" % Versions.upickle % "compile",
 
-      "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "compile"
+      "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "compile",
+
+      "org.apache.spark" %% "spark-core" % Versions.spark_core % "compile",
+      "org.apache.spark" %% "spark-sql" % Versions.spark_sql % "compile",
+      "org.apache.spark" %% "spark-graphx" % Versions.spark_graphx % "compile"
     ),
     libraryDependencies ~= {
       _ map {
