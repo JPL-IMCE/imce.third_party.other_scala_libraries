@@ -55,12 +55,11 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
       artifacts += resourceArtifact.value,
 
       // contents of the '*-resource.zip' to be produced by 'universal:packageBin'
-      mappings in Universal <++= (
-        appConfiguration,
-        classpathTypes,
-        update,
-        streams) map {
-        (appC, cpT, up, s) =>
+      mappings in Universal ++= {
+        val appC = appConfiguration.value
+        val cpT = classpathTypes.value
+        val up = update.value
+        val s = streams.value
 
           def getFileIfExists(f: File, where: String)
           : Option[(File, String)] =
@@ -162,9 +161,15 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
 
       extractArchives := {},
 
-      artifacts <+= (name in Universal) { n => Artifact(n, "zip", "zip", Some("resource"), Seq(), None, Map()) },
-      packagedArtifacts <+= (packageBin in Universal, name in Universal) map { (p, n) =>
-        Artifact(n, "zip", "zip", Some("resource"), Seq(), None, Map()) -> p
+      artifacts += {
+        val n = (name in Universal).value
+        Artifact(n, "zip", "zip", "resource")
+      },
+
+      packagedArtifacts += {
+        val p = (packageBin in Universal).value
+        val n = (name in Universal).value
+        Artifact(n, "zip", "zip", "resource") -> p
       }
     )
 
@@ -222,7 +227,10 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
 
       "org.apache.spark" %% "spark-core" % Versions.spark_core % "compile",
       "org.apache.spark" %% "spark-sql" % Versions.spark_sql % "compile",
-      "org.apache.spark" %% "spark-graphx" % Versions.spark_graphx % "compile"
+      "org.apache.spark" %% "spark-graphx" % Versions.spark_graphx % "compile",
+      "org.apache.spark" %% "spark-streaming" % Versions.spark_streaming % "compile",
+
+      "com.github.scopt" %% "scopt" % Versions.scopt % "compile"
     ),
     libraryDependencies ~= {
       _ map {
