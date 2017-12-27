@@ -201,7 +201,7 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
       "io.spray" %% "spray-testkit" % Versions.spray % "compile" withSources() withJavadoc(),
 
       "com.typesafe.play" %% "play" % Versions.play % "compile" withSources(),
-      "com.typesafe.play" %% "play-functional" % Versions.play % "compile" withSources(),
+      "com.typesafe.play" %% "play-functional" % Versions.play_functional % "compile" withSources(),
 
       "com.typesafe.play" %% "play-json" % Versions.play_json % "compile" withSources(),
 
@@ -219,6 +219,9 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
       "org.apache.spark" %% "spark-sql" % Versions.spark_sql % "compile",
       "org.apache.spark" %% "spark-graphx" % Versions.spark_graphx % "compile",
       "org.apache.spark" %% "spark-streaming" % Versions.spark_streaming % "compile",
+
+      "com.fasterxml.jackson.module" % "jackson-module-paranamer" % Versions.spark_jackson % "compile",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % Versions.spark_jackson % "compile",
 
       "com.github.scopt" %% "scopt" % Versions.scopt % "compile"
     ),

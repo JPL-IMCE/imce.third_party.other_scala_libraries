@@ -2,7 +2,7 @@
 object Versions {
 
   // this project's version
-  val version = "3.5.0"
+  val version = "3.5.1"
 
   val scala_version = "2.11.11"
 
@@ -40,10 +40,13 @@ object Versions {
   val scalaz = "7.2.15"
 
   // http://mvnrepository.com/artifact/com.typesafe.play/play_2.11
-  val play = "2.6.5"
+  val play = "2.6.10"
+
+  // http://mvnrepository.com/artifact/com.typesafe.play/play-functional_2.11
+  val play_functional = "2.6.8"
 
   // http://mvnrepository.com/artifact/com.typesafe.play/play-json_2.11
-  val play_json = "2.6.6"
+  val play_json = "2.6.8"
 
   // https://github.com/julienrf/play-json-derived-codecs
   val play_json_derived_codecs = "4.0.0"
@@ -58,16 +61,19 @@ object Versions {
   val upickle="0.4.4"
 
   // http://mvnrepository.com/artifact/org.apache.spark/spark-core_2.11
-  val spark_core="2.2.0"
+  val spark_core="2.2.1"
 
   // http://mvnrepository.com/artifact/org.apache.spark/spark-sql_2.11
-  val spark_sql="2.2.0"
+  val spark_sql="2.2.1"
 
   // http://mvnrepository.com/artifact/org.apache.spark/spark-streaming_2.11
-  val spark_streaming="2.2.0"
+  val spark_streaming="2.2.1"
 
   // http://mvnrepository.com/artifact/org.apache.spark/spark-graphx_2.11
-  val spark_graphx="2.2.0"
+  val spark_graphx="2.2.1"
+
+  // spark requirements
+  val spark_jackson="2.8.10"
 
   // https://github.com/scopt/scopt
   val scopt="3.7.0"
