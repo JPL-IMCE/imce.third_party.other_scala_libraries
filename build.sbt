@@ -220,11 +220,12 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
       "org.apache.spark" %% "spark-graphx" % Versions.spark_graphx % "compile",
       "org.apache.spark" %% "spark-streaming" % Versions.spark_streaming % "compile",
 
-      "com.fasterxml.jackson.module" % "jackson-module-paranamer" % Versions.spark_jackson % "compile",
-      "com.fasterxml.jackson.module" %% "jackson-module-scala" % Versions.spark_jackson % "compile",
 
       "com.github.scopt" %% "scopt" % Versions.scopt % "compile"
     ),
+    dependencyOverrides += "com.fasterxml.jackson.module" % "jackson-module-paranamer" % Versions.spark_jackson % "compile",
+    dependencyOverrides += "com.fasterxml.jackson.module" %% "jackson-module-scala" % Versions.spark_jackson % "compile",
+
     libraryDependencies ~= {
       _ map {
         case m if m.organization == "com.typesafe.play" =>
