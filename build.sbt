@@ -129,13 +129,18 @@ def IMCEThirdPartyProject(projectName: String, location: String): Project =
           oReport <- compileConfig.details
           mReport <- oReport.modules
           (artifact, file) <- mReport.artifacts
+          _ = s.log.info(s"${oReport.organization}, ${oReport.name}, ${file.name} artifact=$artifact (extension=${artifact.extension}, evicted=${mReport.evicted}, in zip=${zipFiles.contains(file)}, classifier=${artifact.`classifier`}, type=${artifact.`type`})")
           if !mReport.evicted && "jar" == artifact.extension && !zipFiles.contains(file)
         } yield (oReport.organization, oReport.name, file, artifact)
+
+        val jars1 = fileArtifacts.filter { case (_, _, _, a) => a.`classifier`.getOrElse(a.`type`) == "jar"}
+        s.log.info(s"jars: ${jars1.size}")
 
         val fileArtifactsByType = fileArtifacts.groupBy { case (_, _, _, a) =>
           a.`classifier`.getOrElse(a.`type`)
         }
-        val jarArtifacts = fileArtifactsByType("jar").map { case (o, _, jar, _) => o -> jar }.to[Set].to[Seq].sortBy { case (o, jar) => s"$o/${jar.name}" }
+        val jarArtifacts = fileArtifactsByType("jar").union(fileArtifactsByType("bundle")).map { case (o, _, jar, _) => o -> jar }.to[Set].to[Seq].sortBy { case (o, jar) => s"$o/${jar.name}" }
+        s.log.info(s"jarArtifacts: ${jarArtifacts.size}")
         val srcArtifacts = fileArtifactsByType("sources").map { case (o, _, jar, _) => o -> jar }.to[Set].to[Seq].sortBy { case (o, jar) => s"$o/${jar.name}" }
         val docArtifacts = fileArtifactsByType("javadoc").map { case (o, _, jar, _) => o -> jar }.to[Set].to[Seq].sortBy { case (o, jar) => s"$o/${jar.name}" }
 
