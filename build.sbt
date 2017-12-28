@@ -215,8 +215,15 @@ lazy val otherLibs = IMCEThirdPartyProject("other-scala-libraries", "otherLibs")
 
       "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "compile",
 
-      "org.apache.spark" %% "spark-core" % Versions.spark_core % "compile",
-      "org.apache.spark" %% "spark-sql" % Versions.spark_sql % "compile",
+      "org.apache.spark" %% "spark-core" % Versions.spark_core
+        % "compile"
+        exclude("com.fasterxml.jackson.module", "jackson-module-scala")
+        exclude("com.fasterxml.jackson.core", "jackson-annotations")
+        exclude("com.fasterxml.jackson.core", "jackson-databind"),
+
+      "org.apache.spark" %% "spark-sql" % Versions.spark_sql % "compile"
+        exclude("com.fasterxml.jackson.core", "jackson-databind"),
+
       "org.apache.spark" %% "spark-graphx" % Versions.spark_graphx % "compile",
       "org.apache.spark" %% "spark-streaming" % Versions.spark_streaming % "compile",
 

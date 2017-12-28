@@ -2,7 +2,7 @@
 object Versions {
 
   // this project's version
-  val version = "3.5.2"
+  val version = "3.5.3"
 
   val scala_version = "2.11.11"
 
